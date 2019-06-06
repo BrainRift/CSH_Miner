@@ -1,5 +1,7 @@
 # twitterminer
 
+Pulls Twitter data and stores it in a sqlite database.  It also pulls images and videos and stores them in a file direcectory on your local machine.  It will hash files and data pulled.
+
 You will need 
 Python 3.x
 Tweepy module installed
