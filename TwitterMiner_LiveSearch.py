@@ -98,7 +98,7 @@ class StreamListener(tweepy.StreamListener):
         source = status.source
         reply_to_screen_name = status.in_reply_to_screen_name
         replystatusid = status.in_reply_to_status_id
-        terms = str(Twitter_settings.TRACK_TERMS)
+        terms = str(TwitterMiner_settings.TRACK_TERMS)
         #Begin new code
         #Checks for Media in the Tweet and downloads it
         
@@ -323,6 +323,6 @@ api = tweepy.API(auth)
 
 stream_listener = StreamListener()
 stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
-stream.filter(track=Twitter_settings.TRACK_TERMS)
+stream.filter(track=TwitterMiner_settings.TRACK_TERMS)
 #stream.filter(locations=[-82.265659,41.373736,-82.164579,41.426754]
-#stream.filter(locations=Twitter_settings.BOUNDING_BOX)
+#stream.filter(locations=TwitterMiner_settings.BOUNDING_BOX)
