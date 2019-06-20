@@ -314,9 +314,12 @@ class StreamListener(tweepy.StreamListener):
                                                          bookmark))
             conn.commit()
             print(" ")
-            print(str(createddate))
-            print(screenname)
-            print(str(tweet))
+            print("----------")
+            print(" ")
+            print("Date: " + str(createddate))
+            print("Screen Name: " + screenname)
+            print("User Name: " + usersname)
+            print("Tweet: " + str(tweet))
             print(" ")
                    
         except lite.IntegrityError:

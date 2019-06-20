@@ -355,5 +355,6 @@ if __name__ == '__main__':
     get_all_tweets(screenname)
     
     print("\n Finished collecting Tweets from user --- %s" % screenname)
+    print("Results are stored in " + casename)
     
     #validate_image('T_Tweets')

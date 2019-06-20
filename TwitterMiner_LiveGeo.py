@@ -92,13 +92,14 @@ class CustomStreamListener(tweepy.StreamListener):
             #Prints basic information to screen
             #print(status)
             print(" ")
+            print("----------")
+            print(" ")
             print("Date : ", status.created_at)
             print("Username : ", status.user.screen_name)
             print("Name : ", status.user.name)
             print("Location : ", status.place.full_name)
             text_display = status.text
-            print("Tweet : ", text_display.replace('&amp;','&'))
-            print(" ")
+            
             
             
             #Puts the data in the database
@@ -117,6 +118,7 @@ class CustomStreamListener(tweepy.StreamListener):
             
             if hasattr(status, 'retweeted_status'):
                 is_retweet = True
+                print("ReTweet: Yes")
                 
                 #Added this section on 6-19-19 due to truncated ReTweets
                 #This checks for populated data in the extended_tweet
@@ -125,14 +127,17 @@ class CustomStreamListener(tweepy.StreamListener):
                 if hasattr(status.retweeted_status, 'extended_tweet'): 
                     Amp_text = str(status.retweeted_status.extended_tweet['full_text'])
                     tweet = "RT: " + Amp_text.replace('&amp;','&')
+                    print("Tweet: " + tweet)
                     
                 else:
                     Amp_text = status.retweeted_status.text
-                    tweet = "RT: " + Amp_text.replace('&amp;','&') 
+                    tweet = "RT: " + Amp_text.replace('&amp;','&')
+                    print("Tweet: " + tweet)
             else:
                 is_retweet = False            
                 Amp_text = status.text
-                tweet = Amp_text.replace('&amp;','&') 
+                tweet = Amp_text.replace('&amp;','&')
+                print("Tweet: " + tweet)
             
             if status.place is not None:
                 placename = status.place.full_name
