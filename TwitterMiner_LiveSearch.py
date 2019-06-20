@@ -4,13 +4,13 @@ import sqlite3 as lite
 import urllib.request
 import tweepy
 import TwitterMiner_settings
-from TwitterMiner_Keys import *
+from Twitter_Keys import *
 from TwitterMiner_settings import *
 from TwitterMiner_validate import dump_hash
 
 #---------
 #---------
-#--------- Be sure to enter a unique case name
+#--------- Be sure to enter a unique case name in TwitterMiner_setting
 #---------
 #---------
 
@@ -76,11 +76,25 @@ class StreamListener(tweepy.StreamListener):
         
         if hasattr(status, 'retweeted_status'):
             is_retweet = True
+            
+            #Added this section on 6-19-19 due to truncated ReTweets
+            #This checks for populated data in the extended_tweet
+            #If data is populated, it pulls the entire full_text
+            #Thanks to Fraser Phillips for finding this issue
+            if hasattr(status.retweeted_status, 'extended_tweet'): 
+                teststuff=str(status.retweeted_status.extended_tweet['full_text'])
+                print(teststuff)
+                Amp_text = str(status.retweeted_status.extended_tweet['full_text'])
+                tweet = "RT: " + Amp_text.replace('&amp;','&')
+                
+            else:
+                Amp_text = status.text
+                tweet = Amp_text.replace('&amp;','&')
+                        
         else:
-            is_retweet = False        
-        
-        Amp_text = status.text
-        tweet = Amp_text.replace('&amp;','&')   
+            is_retweet = False 
+            Amp_text = status.text
+            tweet = Amp_text.replace('&amp;','&')   
         
         if status.place is not None:
             placename = status.place.full_name
